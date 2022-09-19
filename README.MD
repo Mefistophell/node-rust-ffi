@@ -14,4 +14,4 @@ node index.js
 ```
 Links to articles: 
 
-[Используем написанную на Rust динамическую библиотеку в Node.js](https://ewen-blot.blogspot.com/2020/09/node-rust-ffi.html)
+[Используем написанную на Rust динамическую библиотеку в Node.js](https://blotsky.blogspot.com/2020/09/node-rust-ffi.html)
