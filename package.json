@@ -3,11 +3,14 @@
   "version": "0.0.1",
   "description": "A simple example of Rust and Node.js interaction",
   "main": "index.js",
+  "engines": {
+    "node": ">=16.18.0 <=16.18.1"
+  },
   "dependencies": {
-    "ffi": "^2.3.0",
-    "ref": "^1.3.5",
-    "ref-array": "^1.2.0",
-    "ref-struct": "^1.1.0"
+    "ffi-napi": "^4.0.3",
+    "ref-napi": "^3.0.3",
+    "ref-array-napi": "^1.2.2",
+    "ref-struct-napi": "^1.1.1"
   },
   "devDependencies": {},
   "scripts": {

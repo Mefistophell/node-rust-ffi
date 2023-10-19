@@ -1,7 +1,8 @@
-const ffi = require('ffi')
-const ref = require('ref')
-const StructType = require('ref-struct')
-const ArrayType = require('ref-array')
+const ffi = require('ffi-napi')
+const ref = require('ref-napi')
+const StructType = require('ref-struct-napi')
+const ArrayType = require('ref-array-napi')
+const assert = require('assert')
 
 // Initialize the C-like array
 const OutputArrayType = ArrayType(ref.types.int64, 2)
@@ -27,15 +28,13 @@ const lib = ffi.Library('target/release/lib_node_rust', {
   multiply: [OutputType, [OperationType]],
 })
 
-process.stdout.write('\nCall the \'hello\' function:\n')
+process.stdout.write('\nCall the \'hello\' function\n')
 
 const stringToRust = 'Node.js'
 
 // Call the library function "hello"
 let stringFromRust = lib.hello(stringToRust)
-console.log(stringFromRust)
-
-process.stdout.write('\nCall the \'sum\' function:\n')
+assert.deepStrictEqual(stringFromRust, 'Hello Node.js from Rust')
 
 // Create the structure
 const multiplication = new OperationType({ operand_a: 50, operand_b: -5 })
@@ -43,9 +42,8 @@ const multiplication = new OperationType({ operand_a: 50, operand_b: -5 })
 // Call the library function "multiply"
 const result = lib.multiply(multiplication)
 
-console.log(result.result)
-console.log(result.operands.toArray())
-console.log(result.description)
+assert.deepStrictEqual(result.result, -250)
+assert.deepStrictEqual(result.operands.toArray(), [ 50, -5 ])
+assert.deepStrictEqual(result.description, '50 multiplied by -5 is -250')
 
-// Print as an object
 console.dir(result.toObject())
